@@ -21,6 +21,8 @@
 ```bash
 wsl --install
 ```
+![](images/图片1.png)
+![](images/图片2.png)
 
 **（2）重启电脑。**
 
@@ -28,12 +30,15 @@ wsl --install
 ```bash
 wsl --set-default Ubuntu
 ```
+![](images/图片3.png)
 
 **（4）在 WSL 中安装基础依赖：**
 ```bash
 sudo apt update && sudo apt upgrade -y
 sudo apt install git ripgrep -y
 ```
+![](images/图片4.png)
+![](images/图片5.png)
 
 ✅ WSL 安装完成！你的电脑现在可以运行 Linux 环境了。
 
@@ -70,7 +75,7 @@ export NVM_DIR="$HOME/.nvm"
 ```bash
 source ~/.bashrc
 ```
-
+![](images/图片6.png)
 验证安装：
 ```bash
 nvm --version
@@ -91,7 +96,7 @@ nvm install 18
 ✅ Node.js 安装完成！
 
 ---
-
+![](images/图片7.png)
 ## 2. 安装 Claude Code
 ```bash
 npm install -g @anthropic-ai/claude-code
@@ -100,17 +105,18 @@ npm install -g @anthropic-ai/claude-code
 > ⚠️ 如果直接输入 `claude` 报错，别慌！这通常是网络问题，请继续看第 3 节的代理配置。
 
 ---
+![](images/图片8.png)
 
 ## 3. 适配 WSL 网络环境（代理配置）
 
 由于 Claude Code 需要访问 Anthropic 的 API，在国内环境下需要配置代理。
-
+![](images/图片9.png)
 ### 3.1 准备工作
 
 1. **打开代理工具**，选择美国节点
 2. **记下代理端口**（例如 `10809`）
 3. **开启"允许来自局域网的连接"**（在代理软件的设置中）
-
+![](images/图片10.png)
 ### 3.2 获取 Windows 主机 IP
 
 在 CMD 中执行：
@@ -118,8 +124,8 @@ npm install -g @anthropic-ai/claude-code
 ipconfig
 ```
 
-找到 **"以太网适配器 vEthernet (WSL)"** 下的 IPv4 地址，例如 `172.27.224.1`。
-
+找到 **"以太网适配器 vEthernet (WSL)"** 下的 IPv4 地址，例如 `***.**.***.*`。
+![](images/图片11.png)
 ### 3.3 配置 WSL 代理
 ```bash
 nano ~/.bashrc
@@ -127,7 +133,7 @@ nano ~/.bashrc
 
 在文件末尾添加（**请替换为你自己的 IP 和端口**）：
 ```bash
-export windows_ip=172.27.224.1       # ← 替换为你的主机 IP
+export windows_ip=`***.**.***.*      # ← 替换为你的主机 IP
 export http_proxy=http://$windows_ip:10809   # ← 替换为你的代理端口
 export https_proxy=http://$windows_ip:10809
 export no_proxy=localhost,127.0.0.1,10.0.0.0/8,192.168.0.0/16,172.16.0.0/12
@@ -144,9 +150,10 @@ source ~/.bashrc
 echo $http_proxy
 echo $https_proxy
 # 应输出类似 http://172.27.224.1:10809
-
+![](images/图片12.png)
 # 测试与 Anthropic API 的连通性
 curl https://api.anthropic.com
+![](images/图片13.png)
 ```
 
 如果返回了内容（一只小爬虫 🐛），说明配置成功！
@@ -163,6 +170,7 @@ claude
 ### 4.2 选择外观模式
 
 首次启动会让你选择界面主题，按个人喜好选择即可。
+![](images/图片14.png)
 
 ### 4.3 登录 Claude 账户
 
@@ -175,7 +183,7 @@ claude
 如果你有 Claude Pro 订阅，可以切换到更强大的模型（如 Opus）以获得最佳体验。
 
 ---
-
+![](images/图片20.png)
 ## 🔧 常见问题
 
 | 问题 | 解决方案 |
